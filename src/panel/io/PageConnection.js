@@ -8,9 +8,6 @@ export default class PageConnection {
             tabId: chrome.devtools.inspectedWindow.tabId,
         })
         this._backgroundPageConnection.onMessage.addListener((msg) => {
-            console.log('got a message bro')
-            console.log(msg)
-            // document.getElementById('json').innerHTML = JSON.stringify(msg.payload)
             onJSON(msg.payload)
         })
     }
