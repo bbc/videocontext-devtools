@@ -1,6 +1,6 @@
 chrome.devtools.panels.create("VideoContext",
     "icon.png",
-    "panel.html",
+    "panel/index.html",
     function(panel) {
       // code invoked on panel creation
     //   console.log("i made a panel");

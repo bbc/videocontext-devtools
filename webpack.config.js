@@ -21,6 +21,9 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
+            { from: 'src/*.html', to: '[name].html' },
+            { from: 'src/*.js', to: '[name].js' },
+            { from: 'src/manifest.json', to: 'manifest.json' },
         ]),
         new HTMLWebpackPlugin({
             filename: "panel/index.html",
