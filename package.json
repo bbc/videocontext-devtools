@@ -27,7 +27,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "@bbc/visualise-videocontext": "^3.0.0",
+    "@bbc/visualise-videocontext": "^3.2.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   }
