@@ -1,6 +1,6 @@
 import React from 'react'
-// import { PageConnection } from '../io'
-import { MockPageConnection as PageConnection } from '../io'
+import { PageConnection } from '../io'
+// import { MockPageConnection as PageConnection } from '../io'
 import Visualisation from './Visualisation.jsx'
 
 class App extends React.Component {
