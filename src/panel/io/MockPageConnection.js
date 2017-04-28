@@ -7,6 +7,6 @@ export default class MockPageConnection {
     requestJSONFromBackground () {
         setTimeout(() => {
             this._onJSON(mock)
-        }, 0)
+        }, 500)
     }
 }
