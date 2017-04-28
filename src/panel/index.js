@@ -1,17 +1,9 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-// import { PageConnection } from './io'
-import { MockPageConnection as PageConnection } from './io'
 
-function main () {
-    const conn = new PageConnection((msg) => {
-        console.log(msg)
-    })
-    conn.requestJSONFromBackground()
-}
+import App from './components/App.jsx'
 
 ReactDOM.render(
-    <div>Hello world!!!!</div>,
+    <App />,
     document.getElementById('app'),
-    main,
 )
