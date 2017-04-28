@@ -6,10 +6,16 @@ import Visualisation from './Visualisation.jsx'
 class App extends React.Component {
     constructor (props) {
         super(props)
-        this.state = { json: null }
+        this.state = {
+            json: null,
+            detached: false,
+        }
     }
     componentDidMount () {
         const conn = new PageConnection((msg) => {
+            if (this.state.detached) {
+                return
+            }
             if (msg) {
                 this.setState({ json: msg })
             } else {
@@ -26,9 +32,30 @@ class App extends React.Component {
 
     render () {
         return (
-            <div>
-                <div>Connected: {this.state.json ? 'YEP' : 'NOPE'}</div>
-                { this.state.json ? <Visualisation json={this.state.json} /> : null }
+            <div
+                style={{
+                    backgroundColor: this.state.detached ? '#ffeaea' : '#fff',
+                    width: '100%',
+                    height: '100%',
+                }}
+            >
+                <button
+                    onClick={() => this.setState({ detached: false })}
+                    style={{ opacity: this.state.detached ? 1 : 0 }}
+                >Undetach</button>
+                { this.state.json ?
+                    <Visualisation
+                        json={this.state.json}
+                        onZoom={() => {
+                            if (!this.state.detached) {
+                                // might be able to replace this with some logic
+                                // in Visualisation
+                                this.setState({ detached: true })
+                            }
+                        }}
+                    /> :
+                    <div>Connecting...</div>
+                }
             </div>
         )
     }
