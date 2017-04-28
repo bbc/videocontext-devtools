@@ -1,4 +1,4 @@
-# Usage
+# Usage
 
 To hook into this extension from a webpage running VideoContext, use the following:
 
