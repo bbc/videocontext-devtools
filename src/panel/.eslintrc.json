@@ -8,6 +8,9 @@
     "node": true,
     "jest": true
   },
+  "globals": {
+      "chrome": true
+  },
   "rules": {
       "semi": ["error", "never"],
       "indent": ["error", 4],

@@ -1,0 +1,142 @@
+{
+    "source0": {
+        "type": "VideoNode",
+        "url": "http://localhost:8080/f13004eed4251c602bbe15737e8a1ecb.mp4",
+        "start": 0,
+        "stop": 20
+    },
+    "processor0": {
+        "type": "TransitionNode",
+        "definition": {
+            "title": "Cross-Fade",
+            "description": "A cross-fade effect. Typically used as a transistion.",
+            "vertexShader": "\t    attribute vec2 a_position;\t    attribute vec2 a_texCoord;\t    varying vec2 v_texCoord;\t    void main() {\t        gl_Position = vec4(vec2(2.0,2.0)*a_position-vec2(1.0, 1.0), 0.0, 1.0);\t        v_texCoord = a_texCoord;\t    }",
+            "fragmentShader": "\t    precision mediump float;\t    uniform sampler2D u_image_a;\t    uniform sampler2D u_image_b;\t    uniform float mix;\t    varying vec2 v_texCoord;\t    varying float v_mix;\t    void main(){\t        vec4 color_a = texture2D(u_image_a, v_texCoord);\t        vec4 color_b = texture2D(u_image_b, v_texCoord);\t        color_a[0] *= (1.0 - mix);\t        color_a[1] *= (1.0 - mix);\t        color_a[2] *= (1.0 - mix);\t        color_a[3] *= (1.0 - mix);\t        color_b[0] *= mix;\t        color_b[1] *= mix;\t        color_b[2] *= mix;\t        color_b[3] *= mix;\t        gl_FragColor = color_a + color_b;\t    }",
+            "properties": {
+                "mix": {
+                    "type": "uniform",
+                    "value": 0
+                }
+            },
+            "inputs": [
+                "u_image_a",
+                "u_image_b"
+            ]
+        },
+        "inputs": [
+            {
+                "id": "processor1",
+                "index": 0
+            },
+            {
+                "id": "processor2",
+                "index": 1
+            }
+        ],
+        "properties": {
+            "mix": 1
+        },
+        "transitions": {
+            "mix": [
+                {
+                    "start": 0,
+                    "end": 0,
+                    "current": 0,
+                    "target": 1,
+                    "property": "mix"
+                },
+                {
+                    "start": 5,
+                    "end": 8,
+                    "current": 1,
+                    "target": 0,
+                    "property": "mix"
+                }
+            ]
+        }
+    },
+    "processor1": {
+        "type": "EffectNode",
+        "definition": {
+            "title": "Monochrome",
+            "description": "Change images to a single chroma (e.g can be used to make a black & white filter). Input color mix and output color mix can be adjusted.",
+            "vertexShader": "\t            attribute vec2 a_position;\t            attribute vec2 a_texCoord;\t            varying vec2 v_texCoord;\t            void main() {\t                gl_Position = vec4(vec2(2.0,2.0)*a_position-vec2(1.0, 1.0), 0.0, 1.0);\t                v_texCoord = a_texCoord;\t            }",
+            "fragmentShader": "\t            precision mediump float;\t            uniform sampler2D u_image;\t            uniform vec3 inputMix;\t            uniform vec3 outputMix;\t            varying vec2 v_texCoord;\t            varying float v_mix;\t            void main(){\t                vec4 color = texture2D(u_image, v_texCoord);\t                float mono = color[0]*inputMix[0] + color[1]*inputMix[1] + color[2]*inputMix[2];\t                color[0] = mono * outputMix[0];\t                color[1] = mono * outputMix[1];\t                color[2] = mono * outputMix[2];\t                gl_FragColor = color;\t            }",
+            "properties": {
+                "inputMix": {
+                    "type": "uniform",
+                    "value": [
+                        0.4,
+                        0.6,
+                        0.2
+                    ]
+                },
+                "outputMix": {
+                    "type": "uniform",
+                    "value": [
+                        1,
+                        1,
+                        1
+                    ]
+                }
+            },
+            "inputs": [
+                "u_image"
+            ]
+        },
+        "inputs": [
+            {
+                "id": "source0",
+                "index": 0
+            }
+        ],
+        "properties": {
+            "inputMix": [
+                0.4,
+                0.6,
+                0.2
+            ],
+            "outputMix": [
+                1,
+                1,
+                1
+            ]
+        }
+    },
+    "processor2": {
+        "type": "EffectNode",
+        "definition": {
+            "title": "Opacity",
+            "description": "Sets the opacity of an input.",
+            "vertexShader": "\n    attribute vec2 a_position;\n    attribute vec2 a_texCoord;\n    varying vec2 v_texCoord;\n    void main() {\n        gl_Position = vec4(vec2(2.0,2.0)*a_position-vec2(1.0, 1.0), 0.0, 1.0);\n        v_texCoord = a_texCoord;\n    }",
+            "fragmentShader": "\n    precision mediump float;\n    uniform sampler2D u_image;\n    uniform float opacity;\n    varying vec2 v_texCoord;\n    varying float v_opacity;\n    void main(){\n        vec4 color = texture2D(u_image, v_texCoord);\n        color[3] *= opacity;\n        gl_FragColor = color;\n    }",
+            "properties": {
+                "opacity": {
+                    "type": "uniform",
+                    "value": 0.7
+                }
+            },
+            "inputs": [
+                "u_image"
+            ]
+        },
+        "inputs": [
+            {
+                "id": "source0",
+                "index": 0
+            }
+        ],
+        "properties": {
+            "opacity": 0.7
+        }
+    },
+    "destination": {
+        "type": "Destination",
+        "inputs": [
+            {
+                "id": "processor0",
+                "index": 0
+            }
+        ]
+    }
+}
