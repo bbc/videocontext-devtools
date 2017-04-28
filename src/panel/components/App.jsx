@@ -1,38 +1,34 @@
 import React from 'react'
-import VideoContextVisualisation from '@bbc/visualise-videocontext'
-import { PageConnection } from '../io'
-// import { MockPageConnection as PageConnection } from '../io'
+// import { PageConnection } from '../io'
+import { MockPageConnection as PageConnection } from '../io'
+import Visualisation from './Visualisation.jsx'
 
 class App extends React.Component {
     constructor (props) {
         super(props)
-        this.state = { connected: false }
+        this.state = { json: null }
     }
     componentDidMount () {
-        const vis = new VideoContextVisualisation(this._ref)
-
         const conn = new PageConnection((msg) => {
             if (msg) {
-                vis.setData(msg)
-                vis.render()
-                this.setState({ connected: true })
+                this.setState({ json: msg })
             } else {
-                this.setState({ connected: false })
+                this.setState({ json: null })
             }
         })
         this._timer = setInterval(() => {
             conn.requestJSONFromBackground()
         }, 100)
     }
+    componentWillUnmount () {
+        clearInterval(this._timer)
+    }
 
     render () {
         return (
             <div>
-                <div>Connected: {this.state.connected ? 'YEP' : 'NOPE'}</div>
-                <div
-                    ref={(ref) => { this._ref = ref }}
-                    style={{ width: '100%', height: '400px' }}
-                />
+                <div>Connected: {this.state.json ? 'YEP' : 'NOPE'}</div>
+                { this.state.json ? <Visualisation json={this.state.json} /> : null }
             </div>
         )
     }
