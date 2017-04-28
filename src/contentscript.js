@@ -1,29 +1,31 @@
-function retrieveWindowVariables(variables) {
+function retrieveJson() {
+    var clientFunctionName = "__GET_VIDEOCONTEXT_JSON__"
+    var tempAttrName = "tmp_json"
+    var tempScriptId = "tmpScript"
+
     var ret = {};
 
     var scriptContent = "";
-    for (var i = 0; i < variables.length; i++) {
-        var currVariable = variables[i];
-        scriptContent += "if (typeof " + currVariable + " !== 'undefined') document.body.setAttribute('tmp_" + currVariable + "', JSON.stringify(" + currVariable + "));\n"
-    }
+    scriptContent += "if (typeof " + clientFunctionName + " !== 'undefined') document.body.setAttribute('" + tempAttrName + "', JSON.stringify(" + clientFunctionName + "()));\n"
 
     var script = document.createElement('script');
-    script.id = 'tmpScript';
+    script.id = tempScriptId;
     script.appendChild(document.createTextNode(scriptContent));
     (document.body || document.head || document.documentElement).appendChild(script);
 
-    for (var i = 0; i < variables.length; i++) {
-        var currVariable = variables[i];
-        ret[currVariable] = JSON.parse(document.body.getAttribute("tmp_" + currVariable));
-        document.body.removeAttribute("tmp_" + currVariable);
+    if (document.body.hasAttribute(tempAttrName)) {
+        var json = JSON.parse(document.body.getAttribute(tempAttrName));
+        document.body.removeAttribute(tempAttrName);
+        document.body.removeChild(document.getElementById(tempScriptId))
+        return json
+    } else {
+        return null
     }
-
-     document.body.removeChild(document.getElementById("tmpScript"))
-
-    return ret;
 }
 
 chrome.runtime.onMessage.addListener(() => {
-    chrome.runtime.sendMessage({ type: "contentscriptSendingJSON", payload: retrieveWindowVariables(["foo"]) })
-    console.log("I got a message!!!");
+    chrome.runtime.sendMessage({
+        type: "contentscriptSendingJSON",
+        payload: retrieveJson(),
+    })
 })
