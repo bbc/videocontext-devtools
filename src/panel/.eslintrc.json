@@ -1,0 +1,38 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+      "semi": ["error", "never"],
+      "indent": ["error", 4],
+      "space-before-function-paren": ["error", "always"],
+      "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+      "no-underscore-dangle": 0,
+      "no-console": 0,
+      "no-constant-condition": [1, { "checkLoops": false }],
+      "no-unused-vars": 1,
+      "react/jsx-indent": [2, 4],
+      "react/jsx-indent-props": [2, 4],
+      "react/sort-comp": [1, {
+          "order": [
+              "type-annotations",
+              "static-methods",
+              "lifecycle",
+              "everything-else",
+              "render"
+          ]
+      }],
+      "react/jsx-filename-extension": 0,
+      "import/first": 0,
+      "import/no-unresolved": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/extensions": 0,
+      "import/prefer-default-export": 1
+  }
+}

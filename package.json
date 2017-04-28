@@ -1,0 +1,24 @@
+{
+  "name": "visualise-videocontext-extension",
+  "version": "0.0.1",
+  "description": "Visualise VideoContext",
+  "main": "index.js",
+  "author": "Ben Robinson <ben.robinson@bbc.co.uk>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-latest": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-loader": "^1.6.3",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "webpack": "^2.4.1"
+  },
+  "dependencies": {
+  }
+}
