@@ -2,6 +2,7 @@ import React from 'react'
 import { PageConnection } from '../io'
 // import { MockPageConnection as PageConnection } from '../io'
 import Visualisation from './Visualisation.jsx'
+import './App.css'
 
 class App extends React.Component {
     constructor (props) {
@@ -33,6 +34,7 @@ class App extends React.Component {
     render () {
         return (
             <div
+                styleName="main"
                 style={{
                     backgroundColor: this.state.detached ? '#ffeaea' : '#fff',
                     width: '100%',
