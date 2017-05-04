@@ -5,9 +5,9 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/panel/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'panel/panel.js',
-        publicPath: '/'
+        path: path.resolve(__dirname, 'dist', 'panel'),
+        filename: 'panel.js',
+        publicPath: '/',
     },
     devtool: 'cheap-module-source-map',
     module: {
@@ -38,16 +38,17 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-            { from: 'src/*.html', to: '[name].html' },
-            { from: 'src/*.js', to: '[name].js' },
-            { from: 'src/manifest.json', to: 'manifest.json' },
+            { from: 'src/*.html', to: '../[name].html' },
+            { from: 'src/*.js', to: '../[name].js' },
+            { from: 'src/manifest.json', to: '../manifest.json' },
         ]),
         new HTMLWebpackPlugin({
-            filename: "panel/index.html",
+            filename: "index.html",
             template: "src/panel/index.html",
         }),
     ],
     devServer: {
-        contentBase: path.join(__dirname, "dist/panel"),
+        contentBase: path.resolve(__dirname, 'dist', 'panel'),
+        publicPath: '/',
     }
 }
