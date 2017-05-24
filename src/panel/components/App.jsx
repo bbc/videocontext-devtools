@@ -1,8 +1,13 @@
 import React from 'react'
-import { PageConnection } from '../io'
-// import { MockPageConnection as PageConnection } from '../io'
+import { PageConnection as LivePageConnection, MockPageConnection } from '../io'
 import Visualisation from './Visualisation.jsx'
 import './App.css'
+
+let PageConnection = LivePageConnection
+
+if (process.env.NODE_ENV !== 'production') {
+    PageConnection = MockPageConnection
+}
 
 class App extends React.Component {
     constructor (props) {
