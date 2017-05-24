@@ -1,5 +1,6 @@
 import React from 'react'
 import VideoContextVisualisation from '@bbc/visualise-videocontext'
+import './Visualisation.css'
 
 export default class Visualisation extends React.Component {
     componentDidMount () {
@@ -17,12 +18,13 @@ export default class Visualisation extends React.Component {
     render () {
         return (
             <div
+                styleName="vis"
                 onMouseDown={this.props.onZoom}
                 onWheel={this.props.onZoom}
             >
                 <div
                     ref={(ref) => { this._ref = ref }}
-                    style={{ width: '100%', height: '400px' }}
+                    styleName="vis"
                 />
             </div>
         )

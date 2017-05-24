@@ -37,8 +37,6 @@ class App extends React.Component {
                 styleName="main"
                 style={{
                     backgroundColor: this.state.detached ? '#ffeaea' : '#fff',
-                    width: '100%',
-                    height: '100%',
                 }}
             >
                 <button
