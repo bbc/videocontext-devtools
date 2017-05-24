@@ -1,6 +1,5 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/panel/index.js',
@@ -41,11 +40,8 @@ module.exports = {
             { from: 'src/*.html', to: '../[name].html' },
             { from: 'src/*.js', to: '../[name].js' },
             { from: 'src/manifest.json', to: '../manifest.json' },
+            { from : 'src/panel/index.html', to: 'index.html' },
         ]),
-        new HTMLWebpackPlugin({
-            filename: "index.html",
-            template: "src/panel/index.html",
-        }),
     ],
     devServer: {
         contentBase: path.resolve(__dirname, 'dist', 'panel'),
