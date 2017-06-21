@@ -21,6 +21,8 @@ const convertStateEnum = (num) => {
     }
 }
 
+const formatTime = time => ((Math.round(time * 100)) / 100).toString()
+
 export default class App extends React.Component {
     constructor (props) {
         super(props)
@@ -55,8 +57,8 @@ export default class App extends React.Component {
                 <div styleName="other-info">
                     <InfoTable
                         rows={[
-                            ['Current time', this.props.json.videoContext.currentTime],
-                            ['Duration', this.props.json.videoContext.duration],
+                            ['Current time', `${formatTime(this.props.json.videoContext.currentTime)}s`],
+                            ['Duration', `${formatTime(this.props.json.videoContext.duration)}s`],
                             ['State', convertStateEnum(this.props.json.videoContext.state)],
                             ['Playback rate', this.props.json.videoContext.playbackRate],
                         ]}
