@@ -1,6 +1,25 @@
 import React from 'react'
 import Visualisation from './Visualisation.jsx'
+import InfoTable from './InfoTable.jsx'
+
 import './App.scss'
+
+const convertStateEnum = (num) => {
+    switch (num) {
+    case 0:
+        return 'Playing'
+    case 1:
+        return 'Paused'
+    case 2:
+        return 'Stalled'
+    case 3:
+        return 'Ended'
+    case 4:
+        return 'Broken'
+    default:
+        return `ERROR: unknown state with code ${num}`
+    }
+}
 
 export default class App extends React.Component {
     constructor (props) {
@@ -17,21 +36,36 @@ export default class App extends React.Component {
                     backgroundColor: this.state.detached ? '#ffeaea' : '#fff',
                 }}
             >
+                <div styleName="vis">
+                    <Visualisation
+                        detached={this.state.detached}
+                        json={this.props.json}
+                        onZoom={() => {
+                            if (!this.state.detached) {
+                                // might be able to replace this with some logic
+                                // in Visualisation
+                                this.setState({ detached: true })
+                            }
+                        }}
+                    />
+                </div>
+
                 <button
-                    onClick={() => this.setState({ detached: false })}
-                    style={{ opacity: this.state.detached ? 1 : 0 }}
-                >Undetach</button>
-                <Visualisation
-                    detached={this.state.detached}
-                    json={this.props.json}
-                    onZoom={() => {
-                        if (!this.state.detached) {
-                            // might be able to replace this with some logic
-                            // in Visualisation
-                            this.setState({ detached: true })
-                        }
-                    }}
-                />
+                    onClick={() => this.setState(state => ({ detached: !state.detached }))}
+                >
+                    {this.state.detached ? 'Undetach' : 'Detach'}
+                </button>
+
+                <div styleName="other-info">
+                    <InfoTable
+                        rows={[
+                            ['Current time', this.props.json.videoContext.currentTime],
+                            ['Duration', this.props.json.videoContext.duration],
+                            ['State', convertStateEnum(this.props.json.videoContext.state)],
+                            ['Playback rate', this.props.json.videoContext.playbackRate],
+                        ]}
+                    />
+                </div>
             </div>
         )
     }

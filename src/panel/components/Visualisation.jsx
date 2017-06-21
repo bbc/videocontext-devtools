@@ -1,24 +1,6 @@
 import React from 'react'
 import VideoContextVisualisation from '@bbc/visualise-videocontext'
-import InfoTable from './InfoTable.jsx'
 import './Visualisation.scss'
-
-const convertStateEnum = (num) => {
-    switch (num) {
-    case 0:
-        return 'Playing'
-    case 1:
-        return 'Paused'
-    case 2:
-        return 'Stalled'
-    case 3:
-        return 'Ended'
-    case 4:
-        return 'Broken'
-    default:
-        return `ERROR: unknown state with code ${num}`
-    }
-}
 
 export default class Visualisation extends React.Component {
     componentDidMount () {
@@ -37,27 +19,15 @@ export default class Visualisation extends React.Component {
     }
     render () {
         return (
-            <div styleName="main">
+            <div
+                styleName="vis"
+                onMouseDown={this.props.onZoom}
+                onWheel={this.props.onZoom}
+            >
                 <div
-                    styleName="vis"
-                    onMouseDown={this.props.onZoom}
-                    onWheel={this.props.onZoom}
-                >
-                    <div
-                        ref={(ref) => { this._ref = ref }}
-                        styleName="rendering"
-                    />
-                </div>
-                <div styleName="other-info">
-                    <InfoTable
-                        rows={[
-                            ['Current time', this.props.json.videoContext.currentTime],
-                            ['Duration', this.props.json.videoContext.duration],
-                            ['State', convertStateEnum(this.props.json.videoContext.state)],
-                            ['Playback rate', this.props.json.videoContext.playbackRate],
-                        ]}
-                    />
-                </div>
+                    ref={(ref) => { this._ref = ref }}
+                    styleName="rendering"
+                />
             </div>
         )
     }
