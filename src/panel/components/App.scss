@@ -1,10 +1,18 @@
 .main {
+  align-items: stretch;
+  display: flex;
+  flex-flow: column nowrap;
   height: 100%;
 }
 
 .vis {
-  height: 50%;
+  flex-basis: 50%;
+}
+
+.detach-button {
+  align-self: flex-start;
 }
 
 .other-info {
+  align-self: center;
 }

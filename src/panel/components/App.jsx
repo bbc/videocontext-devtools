@@ -49,6 +49,7 @@ export default class App extends React.Component {
                 </div>
 
                 <button
+                    styleName="detach-button"
                     onClick={() => this.setState(state => ({ detached: !state.detached }))}
                 >
                     {this.state.detached ? 'Undetach' : 'Detach'}
