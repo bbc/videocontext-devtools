@@ -1,7 +1,7 @@
 function retrieveJson() {
     var clientFunctionName = "__GET_VIDEOCONTEXT_JSON__"
-    var tempAttrName = "tmp_json"
-    var tempScriptId = "tmpScript"
+    var tempAttrName = "__VIDEOCONTEXT_EXTENSION_tmp_json"
+    var tempScriptId = "__VIDEOCONTEXT_EXTENSION_tmpScript"
 
     var ret = {};
 
