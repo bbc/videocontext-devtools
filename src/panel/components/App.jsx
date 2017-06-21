@@ -42,8 +42,6 @@ export default class App extends React.Component {
                         json={this.props.json}
                         onZoom={() => {
                             if (!this.state.detached) {
-                                // might be able to replace this with some logic
-                                // in Visualisation
                                 this.setState({ detached: true })
                             }
                         }}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { PageConnection as LivePageConnection, MockPageConnection } from '../io'
 import App from './App.jsx'
+import './Connector.scss'
 
 let PageConnection = LivePageConnection
 
@@ -32,9 +33,11 @@ export default class Connector extends React.Component {
     }
 
     render () {
-        if (this.state.json) {
-            return <App json={this.state.json} />
-        }
-        return <div>Connecting...</div>
+        return (<div styleName="main">
+            {this.state.json ?
+                <App json={this.state.json} /> :
+                <div>Connecting...</div>
+            }
+        </div>)
     }
 }
