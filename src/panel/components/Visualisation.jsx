@@ -27,8 +27,10 @@ export default class Visualisation extends React.Component {
         this._vis.render()
     }
     componentWillUpdate () {
-        this._vis.setData(this.props.json)
-        this._vis.render()
+        if (!this.props.detached) {
+            this._vis.setData(this.props.json)
+            this._vis.render()
+        }
     }
     componentWillUnmount () {
         this._vis.destroy()
