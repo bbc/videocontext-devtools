@@ -11,12 +11,13 @@ function retrieveJson() {
     var script = document.createElement('script');
     script.id = tempScriptId;
     script.appendChild(document.createTextNode(scriptContent));
-    (document.body || document.head || document.documentElement).appendChild(script);
+    var scriptOwner = (document.body || document.head || document.documentElement)
+    scriptOwner.appendChild(script);
 
-    if (document.body.hasAttribute(tempAttrName)) {
+    if (scriptOwner.hasAttribute(tempAttrName)) {
         var json = JSON.parse(document.body.getAttribute(tempAttrName));
         document.body.removeAttribute(tempAttrName);
-        document.body.removeChild(document.getElementById(tempScriptId))
+        scriptOwner.removeChild(document.getElementById(tempScriptId))
         return json
     } else {
         return null
