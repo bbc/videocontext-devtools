@@ -17,7 +17,7 @@ export default class Connector extends React.Component {
         }
     }
     componentDidMount () {
-        const conn = new PageConnection((msg) => {
+        this.conn = new PageConnection((msg) => {
             if (msg) {
                 this.setState({ json: msg })
             } else {
@@ -25,7 +25,7 @@ export default class Connector extends React.Component {
             }
         })
         this._timer = setInterval(() => {
-            conn.requestJSONFromBackground()
+            this.conn.requestJSONFromBackground()
         }, 100)
     }
     componentWillUnmount () {
@@ -35,7 +35,10 @@ export default class Connector extends React.Component {
     render () {
         return (<div styleName="main">
             {this.state.json ?
-                <App json={this.state.json} /> :
+                <App
+                    json={this.state.json}
+                    togglePlay={() => this.conn.togglePlay()}
+                /> :
                 <div>Connecting...</div>
             }
         </div>)

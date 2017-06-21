@@ -53,6 +53,12 @@ export default class App extends React.Component {
                 >
                     {this.state.detached ? 'Undetach' : 'Detach'}
                 </button>
+                <button
+                    styleName="toggleplay-button"
+                    onClick={() => this.props.togglePlay()}
+                >
+                    {this.props.json.videoContext.state === 0 ? 'Pause' : 'Play'}
+                </button>
 
                 <div styleName="other-info">
                     <InfoTable
