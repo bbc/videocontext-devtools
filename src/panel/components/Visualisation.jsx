@@ -1,5 +1,6 @@
 import React from 'react'
 import VideoContextVisualisation from '@bbc/visualise-videocontext'
+import InfoTable from './InfoTable.jsx'
 import './Visualisation.css'
 
 const convertStateEnum = (num) => {
@@ -46,21 +47,14 @@ export default class Visualisation extends React.Component {
                     />
                 </div>
                 <div styleName="other-info">
-                    <table><tbody>
-                        <tr>
-                            <td>Current time:</td>
-                            <td>{this.props.json.videoContext.currentTime}s</td>
-                        </tr>
-                        <tr>
-                            <td>Duration:</td>
-                            <td>{this.props.json.videoContext.duration}s</td></tr>
-                        <tr>
-                            <td>State:</td>
-                            <td>{convertStateEnum(this.props.json.videoContext.state)}</td></tr>
-                        <tr>
-                            <td>Playback rate:</td>
-                            <td>{this.props.json.videoContext.playbackRate}</td></tr>
-                    </tbody></table>
+                    <InfoTable
+                        rows={[
+                            ['Current time', this.props.json.videoContext.currentTime],
+                            ['Duration', this.props.json.videoContext.duration],
+                            ['State', convertStateEnum(this.props.json.videoContext.state)],
+                            ['Playback rate', this.props.json.videoContext.playbackRate],
+                        ]}
+                    />
                 </div>
             </div>
         )
