@@ -1,5 +1,5 @@
 import React from 'react'
-import './InfoTable.css'
+import './InfoTable.scss'
 
 export default ({ rows }) => (
     <table>

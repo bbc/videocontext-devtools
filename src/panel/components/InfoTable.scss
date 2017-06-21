@@ -1,0 +1,13 @@
+%cell {
+  padding: .2em;
+}
+
+.key {
+  @extend %cell;
+  font-weight: bold;
+  text-align: right;
+}
+
+.value {
+  @extend %cell;
+}

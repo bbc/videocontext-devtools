@@ -1,7 +1,7 @@
 import React from 'react'
 import VideoContextVisualisation from '@bbc/visualise-videocontext'
 import InfoTable from './InfoTable.jsx'
-import './Visualisation.css'
+import './Visualisation.scss'
 
 const convertStateEnum = (num) => {
     switch (num) {

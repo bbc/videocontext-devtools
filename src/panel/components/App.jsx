@@ -1,7 +1,7 @@
 import React from 'react'
 import { PageConnection as LivePageConnection, MockPageConnection } from '../io'
 import Visualisation from './Visualisation.jsx'
-import './App.css'
+import './App.scss'
 
 let PageConnection = LivePageConnection
 

@@ -12,7 +12,7 @@
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
-    "babel-plugin-react-css-modules": "^2.6.1",
+    "babel-plugin-react-css-modules": "^3.0.0",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.0.1",
@@ -24,6 +24,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
     "eslint-plugin-react": "^6.9.0",
+    "node-sass": "^4.5.3",
+    "postcss-scss": "^1.0.1",
+    "sass-loader": "^6.0.6",
     "style-loader": "^0.17.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5"
