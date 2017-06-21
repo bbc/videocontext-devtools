@@ -14,14 +14,14 @@ function retrieveJson() {
     var scriptOwner = (document.body || document.head || document.documentElement)
     scriptOwner.appendChild(script);
 
-    if (scriptOwner.hasAttribute(tempAttrName)) {
-        var json = JSON.parse(document.body.getAttribute(tempAttrName));
+    var result = null;
+    if (document.body.hasAttribute(tempAttrName)) {
+        result = JSON.parse(document.body.getAttribute(tempAttrName));
         document.body.removeAttribute(tempAttrName);
-        scriptOwner.removeChild(document.getElementById(tempScriptId))
-        return json
-    } else {
-        return null
     }
+    scriptOwner.removeChild(document.getElementById(tempScriptId))
+
+    return result;
 }
 
 chrome.runtime.onMessage.addListener(() => {
