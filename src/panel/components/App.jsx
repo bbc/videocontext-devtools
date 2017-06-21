@@ -32,11 +32,8 @@ export default class App extends React.Component {
         return (
             <div
                 styleName="main"
-                style={{
-                    backgroundColor: this.state.detached ? '#ffeaea' : '#fff',
-                }}
             >
-                <div styleName="vis">
+                <div styleName={this.state.detached ? 'vis-detached' : 'vis'}>
                     <Visualisation
                         detached={this.state.detached}
                         json={this.props.json}

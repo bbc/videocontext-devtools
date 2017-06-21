@@ -5,8 +5,17 @@
   height: 100%;
 }
 
-.vis {
+%vis {
   flex-basis: 50%;
+}
+
+.vis {
+  @extend %vis;
+}
+
+.vis-detached {
+  @extend %vis;
+  background-color: #FFDFDF;
 }
 
 .detach-button {
