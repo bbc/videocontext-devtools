@@ -17,4 +17,11 @@ export default class PageConnection {
             name: 'getJSON',
         })
     }
+
+    togglePlay () {
+        this._backgroundPageConnection.postMessage({
+            tabId: chrome.devtools.inspectedWindow.tabId,
+            name: 'togglePlay',
+        })
+    }
 }

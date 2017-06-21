@@ -3,8 +3,6 @@ function retrieveJson() {
     var tempAttrName = "__VIDEOCONTEXT_EXTENSION_tmp_json"
     var tempScriptId = "__VIDEOCONTEXT_EXTENSION_tmpScript"
 
-    var ret = {};
-
     var scriptContent = "";
     scriptContent += "if (typeof " + clientFunctionName + " !== 'undefined') document.body.setAttribute('" + tempAttrName + "', JSON.stringify(" + clientFunctionName + "()));\n"
 
@@ -24,9 +22,31 @@ function retrieveJson() {
     return result;
 }
 
-chrome.runtime.onMessage.addListener(() => {
-    chrome.runtime.sendMessage({
-        type: "contentscriptSendingJSON",
-        payload: retrieveJson(),
-    })
+function togglePlay() {
+    var videoContextVariable = "__VIDEOCONTEXT_REF__"
+    var tempScriptId = "__VIDEOCONTEXT_EXTENSION_togglePlayScript"
+
+    var scriptContent = "";
+    scriptContent += "if (window." + videoContextVariable + ") { if (" + videoContextVariable + ".state === 0) { " + videoContextVariable + ".pause() } else { " + videoContextVariable + ".play() } }"
+
+    var script = document.createElement('script');
+    script.id = tempScriptId;
+    script.appendChild(document.createTextNode(scriptContent));
+    var scriptOwner = (document.body || document.head || document.documentElement)
+    scriptOwner.appendChild(script);
+    // scriptOwner.removeChild(document.getElementById(tempScriptId))
+}
+
+chrome.runtime.onMessage.addListener(msg => {
+    if(msg.type === "askContentScriptForJSON") {
+        chrome.runtime.sendMessage({
+            type: "contentscriptSendingJSON",
+            payload: retrieveJson(),
+        });
+        return;
+    }
+
+    if(msg.type === "tellContentScriptToTogglePlay") {
+        togglePlay();
+    }
 })

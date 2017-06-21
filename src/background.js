@@ -21,6 +21,12 @@ chrome.runtime.onConnect.addListener(function (port) {
             return
         }
 
+        if (message.name === "togglePlay") {
+            console.log("BG received message to toggle play");
+            chrome.tabs.sendMessage(message.tabId, { "type": "tellContentScriptToTogglePlay" })
+            return
+        }
+
     }
 
     // Listen to messages sent from the DevTools page

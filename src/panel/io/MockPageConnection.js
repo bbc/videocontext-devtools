@@ -9,4 +9,8 @@ export default class MockPageConnection {
             this._onJSON(mock)
         }, 500)
     }
+
+    togglePlay () {
+        console.log('Toggle play called. This does nothing.')
+    }
 }
