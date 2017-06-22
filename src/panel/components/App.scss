@@ -1,3 +1,7 @@
+@import '../config/colours';
+
+$playbutton-size: 4em;
+
 .main {
   align-items: stretch;
   display: flex;
@@ -33,10 +37,19 @@
 }
 
 .toggleplay {
-  flex-basis: 4em;
+  background-color: rgba(255, 255, 255, 0);
+  border: 0;
+  flex-basis: $playbutton-size;
   flex-grow: 0;
+  height: $playbutton-size;
+  padding: .7em;
+}
+
+.svg {
+  fill: $black;
 }
 
 .seekbar {
+  align-self: center;
   flex-grow: 1;
 }

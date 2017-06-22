@@ -1,7 +1,10 @@
 import React from 'react'
 import Visualisation from './Visualisation.jsx'
 import InfoTable from './InfoTable.jsx'
+import IconSVG from 'svg-inline-react'
 import Seekbar from './Seekbar.jsx'
+import play from '../img/play.svg'
+import pause from '../img/pause.svg'
 
 import './App.scss'
 
@@ -66,7 +69,10 @@ export default class App extends React.Component {
                         styleName="toggleplay"
                         onClick={() => this.props.togglePlay()}
                     >
-                        {this.props.json.videoContext.state === 0 ? 'Pause' : 'Play'}
+                        <IconSVG
+                            styleName="svg"
+                            src={ctx.state === 0 ? pause : play}
+                        />
                     </button>
                     <div styleName="seekbar">
                         <Seekbar
