@@ -1,6 +1,7 @@
 import React from 'react'
 import Visualisation from './Visualisation.jsx'
 import InfoTable from './InfoTable.jsx'
+import Seekbar from './Seekbar.jsx'
 
 import './App.scss'
 
@@ -31,6 +32,7 @@ export default class App extends React.Component {
         }
     }
     render () {
+        const ctx = this.props.json.videoContext
         return (
             <div
                 styleName="main"
@@ -59,19 +61,17 @@ export default class App extends React.Component {
                 >
                     {this.props.json.videoContext.state === 0 ? 'Pause' : 'Play'}
                 </button>
-                <button
-                    styleName="toggleplay-button"
-                    onClick={() => this.props.seek(0)}
-                >
-                    Restart
-                </button>
+                <Seekbar
+                    value={ctx.currentTime / ctx.duration}
+                    onUserSeek={value => this.props.seek(value * ctx.duration)}
+                />
                 <div styleName="other-info">
                     <InfoTable
                         rows={[
-                            ['Current time', `${formatTime(this.props.json.videoContext.currentTime)}s`],
-                            ['Duration', `${formatTime(this.props.json.videoContext.duration)}s`],
-                            ['State', convertStateEnum(this.props.json.videoContext.state)],
-                            ['Playback rate', this.props.json.videoContext.playbackRate],
+                            ['Current time', `${formatTime(ctx.currentTime)}s`],
+                            ['Duration', `${formatTime(ctx.duration)}s`],
+                            ['State', convertStateEnum(ctx.state)],
+                            ['Playback rate', ctx.playbackRate],
                         ]}
                     />
                 </div>
