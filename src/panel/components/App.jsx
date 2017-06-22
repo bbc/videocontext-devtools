@@ -59,7 +59,12 @@ export default class App extends React.Component {
                 >
                     {this.props.json.videoContext.state === 0 ? 'Pause' : 'Play'}
                 </button>
-
+                <button
+                    styleName="toggleplay-button"
+                    onClick={() => this.props.seek(0)}
+                >
+                    Restart
+                </button>
                 <div styleName="other-info">
                     <InfoTable
                         rows={[

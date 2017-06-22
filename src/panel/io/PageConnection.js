@@ -24,4 +24,12 @@ export default class PageConnection {
             name: 'togglePlay',
         })
     }
+
+    seek (time) {
+        this._backgroundPageConnection.postMessage({
+            tabId: chrome.devtools.inspectedWindow.tabId,
+            name: 'seek',
+            time,
+        })
+    }
 }

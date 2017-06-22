@@ -15,7 +15,10 @@ chrome.runtime.onConnect.addListener(function (port) {
         // other message handling
         if (message.name === "getJSON") {
             console.log("BG received message to get JSON");
-            chrome.tabs.sendMessage(message.tabId, { "type": "askContentScriptForJSON" })
+            chrome.tabs.sendMessage(
+                message.tabId,
+                { type: "askContentScriptForJSON" }
+            )
             // console.log(chrome.tabs);
             //SEND MESSAGE TO CONTENT SCRIPT USING chrome.tabs.sendMessage. this will then send a message which we deal with in chrome.runtime.onMessage, which will then pass the result to panel.js
             return
@@ -23,10 +26,20 @@ chrome.runtime.onConnect.addListener(function (port) {
 
         if (message.name === "togglePlay") {
             console.log("BG received message to toggle play");
-            chrome.tabs.sendMessage(message.tabId, { "type": "tellContentScriptToTogglePlay" })
+            chrome.tabs.sendMessage(
+                message.tabId,
+                { type: "tellContentScriptToTogglePlay" }
+            )
             return
         }
 
+        if (message.name === "seek") {
+            console.log("BG received message to seek to time ", message.time);
+            chrome.tabs.sendMessage(
+                message.tabId,
+                { type: "tellContentScriptToSeek", time: message.time }
+            )
+        }
     }
 
     // Listen to messages sent from the DevTools page

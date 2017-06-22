@@ -38,6 +38,7 @@ export default class Connector extends React.Component {
                 <App
                     json={this.state.json}
                     togglePlay={() => this.conn.togglePlay()}
+                    seek={time => this.conn.seek(time)}
                 /> :
                 <div>Connecting...</div>
             }

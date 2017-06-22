@@ -13,4 +13,8 @@ export default class MockPageConnection {
     togglePlay () {
         console.log('Toggle play called. This does nothing.')
     }
+
+    seek (time) {
+        console.log(`seek called with time ${time}. This does nothing.`)
+    }
 }

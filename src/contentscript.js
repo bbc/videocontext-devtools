@@ -1,3 +1,5 @@
+var VIDEOCONTEXT_VARIABLE = "__VIDEOCONTEXT_REF__"
+
 function retrieveJson() {
     var clientFunctionName = "__GET_VIDEOCONTEXT_JSON__"
     var tempAttrName = "__VIDEOCONTEXT_EXTENSION_tmp_json"
@@ -22,31 +24,45 @@ function retrieveJson() {
     return result;
 }
 
-function togglePlay() {
-    var videoContextVariable = "__VIDEOCONTEXT_REF__"
-    var tempScriptId = "__VIDEOCONTEXT_EXTENSION_togglePlayScript"
-
-    var scriptContent = "";
-    scriptContent += "if (window." + videoContextVariable + ") { if (" + videoContextVariable + ".state === 0) { " + videoContextVariable + ".pause() } else { " + videoContextVariable + ".play() } }"
-
+function executeScript(scriptContent, id) {
+    var tempScriptId = "__VIDEOCONTEXT_EXTENSION_" + id + "__"
     var script = document.createElement('script');
     script.id = tempScriptId;
     script.appendChild(document.createTextNode(scriptContent));
     var scriptOwner = (document.body || document.head || document.documentElement)
     scriptOwner.appendChild(script);
-    // scriptOwner.removeChild(document.getElementById(tempScriptId))
+    scriptOwner.removeChild(document.getElementById(tempScriptId))
+}
+
+function togglePlay() {
+    var scriptContent = "if (window." + VIDEOCONTEXT_VARIABLE + ") { if (" + VIDEOCONTEXT_VARIABLE + ".state === 0) { " + VIDEOCONTEXT_VARIABLE + ".pause() } else { " + VIDEOCONTEXT_VARIABLE + ".play() } }";
+    executeScript(scriptContent, "togglePlay");
+}
+
+
+function seek (time) {
+    var scriptContent = "if (window." + VIDEOCONTEXT_VARIABLE + ") { " + VIDEOCONTEXT_VARIABLE + ".currentTime = " + time + "; }";
+    executeScript(scriptContent, "seek");
 }
 
 chrome.runtime.onMessage.addListener(msg => {
-    if(msg.type === "askContentScriptForJSON") {
+    switch (msg.type) {
+    case "askContentScriptForJSON": {
         chrome.runtime.sendMessage({
             type: "contentscriptSendingJSON",
             payload: retrieveJson(),
         });
         return;
     }
-
-    if(msg.type === "tellContentScriptToTogglePlay") {
+    case "tellContentScriptToTogglePlay": {
         togglePlay();
+        return;
+    }
+    case "tellContentScriptToSeek": {
+        seek(msg.time);
+        return;
+    }
+    default:
+        return;
     }
 })
