@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@bbc/visualise-videocontext@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@bbc/visualise-videocontext/-/visualise-videocontext-4.0.0.tgz#80172096e307776f6ce461187d5b7e1ce210ba42"
+"@bbc/visualise-videocontext@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@bbc/visualise-videocontext/-/visualise-videocontext-4.1.0.tgz#ca9611c2a457ec336d445f4a3087cccefc15de43"
   dependencies:
     cytoscape "^3.0.0"
     cytoscape-dagre "^1.5.0"

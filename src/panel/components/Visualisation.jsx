@@ -4,7 +4,14 @@ import './Visualisation.scss'
 
 export default class Visualisation extends React.Component {
     componentDidMount () {
-        this._vis = new VideoContextVisualisation(this._ref)
+        const colours = {
+            active: '#4CEE7E',
+            inactive: '#6CA97F',
+            error: '#F3516C',
+            processing: '#EE4CBC',
+            destination: '#000',
+        }
+        this._vis = new VideoContextVisualisation(this._ref, colours)
         this._vis.setData(this.props.json)
         this._vis.render()
     }
