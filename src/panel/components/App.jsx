@@ -24,6 +24,10 @@ const convertStateEnum = (num) => {
 
 const formatTime = time => ((Math.round(time * 100)) / 100).toString()
 
+const maxStopTimeForNodes = nodes => Math.max(...nodes
+    .map(n => n.stop)
+    .filter(t => t != null)) // filter out any that we don't yet know the time for.
+
 export default class App extends React.Component {
     constructor (props) {
         super(props)
@@ -33,6 +37,8 @@ export default class App extends React.Component {
     }
     render () {
         const ctx = this.props.json.videoContext
+        const nodes = Object.values(this.props.json.nodes)
+        const duration = ctx.duration || maxStopTimeForNodes(nodes)
         return (
             <div
                 styleName="main"
@@ -64,8 +70,8 @@ export default class App extends React.Component {
                     </button>
                     <div styleName="seekbar">
                         <Seekbar
-                            value={ctx.currentTime / ctx.duration}
-                            onUserSeek={value => this.props.seek(value * ctx.duration)}
+                            value={ctx.currentTime / duration}
+                            onUserSeek={value => this.props.seek(value * duration)}
                         />
                     </div>
                 </section>
@@ -73,7 +79,7 @@ export default class App extends React.Component {
                     <InfoTable
                         rows={[
                             ['Current time', `${formatTime(ctx.currentTime)}s`],
-                            ['Duration', `${formatTime(ctx.duration)}s`],
+                            ['Duration', `${formatTime(duration)}s`],
                             ['State', convertStateEnum(ctx.state)],
                             ['Playback rate', ctx.playbackRate],
                         ]}
