@@ -11,7 +11,8 @@
             "url": "http://localhost:8080/f13004eed4251c602bbe15737e8a1ecb.mp4",
             "start": 0,
             "stop": 20,
-            "currentTime": 5.67
+            "currentTime": 5.67,
+            "state": "playing"
         },
         "processor0": {
             "type": "TransitionNode",
