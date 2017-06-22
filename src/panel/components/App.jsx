@@ -37,7 +37,7 @@ export default class App extends React.Component {
             <div
                 styleName="main"
             >
-                <div styleName={this.state.detached ? 'vis-detached' : 'vis'}>
+                <section styleName={this.state.detached ? 'vis-detached' : 'vis'}>
                     <Visualisation
                         detached={this.state.detached}
                         json={this.props.json}
@@ -47,7 +47,7 @@ export default class App extends React.Component {
                             }
                         }}
                     />
-                </div>
+                </section>
 
                 <button
                     styleName="detach-button"
@@ -55,16 +55,20 @@ export default class App extends React.Component {
                 >
                     {this.state.detached ? 'Undetach' : 'Detach'}
                 </button>
-                <button
-                    styleName="toggleplay-button"
-                    onClick={() => this.props.togglePlay()}
-                >
-                    {this.props.json.videoContext.state === 0 ? 'Pause' : 'Play'}
-                </button>
-                <Seekbar
-                    value={ctx.currentTime / ctx.duration}
-                    onUserSeek={value => this.props.seek(value * ctx.duration)}
-                />
+                <section styleName="controls">
+                    <button
+                        styleName="toggleplay"
+                        onClick={() => this.props.togglePlay()}
+                    >
+                        {this.props.json.videoContext.state === 0 ? 'Pause' : 'Play'}
+                    </button>
+                    <div styleName="seekbar">
+                        <Seekbar
+                            value={ctx.currentTime / ctx.duration}
+                            onUserSeek={value => this.props.seek(value * ctx.duration)}
+                        />
+                    </div>
+                </section>
                 <div styleName="other-info">
                     <InfoTable
                         rows={[

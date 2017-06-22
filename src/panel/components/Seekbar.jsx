@@ -1,4 +1,5 @@
 import React from 'react'
+import './Seekbar.scss'
 
 export default class Seekbar extends React.Component {
     constructor (props) {
@@ -19,6 +20,7 @@ export default class Seekbar extends React.Component {
     render () {
         return (
             <input
+                styleName="main"
                 type="range"
                 max="1"
                 min="0"

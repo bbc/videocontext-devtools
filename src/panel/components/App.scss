@@ -22,10 +22,21 @@
   align-self: flex-start;
 }
 
-.toggleplay-button {
-  align-self: flex-start;
-}
 
 .other-info {
   align-self: center;
+}
+
+.controls {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.toggleplay {
+  flex-basis: 4em;
+  flex-grow: 0;
+}
+
+.seekbar {
+  flex-grow: 1;
 }
