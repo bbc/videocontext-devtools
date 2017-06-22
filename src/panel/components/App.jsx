@@ -64,6 +64,16 @@ export default class App extends React.Component {
                 >
                     {this.state.detached ? 'Undetach' : 'Detach'}
                 </button>
+                <div styleName="other-info">
+                    <InfoTable
+                        rows={[
+                            ['Current time', `${formatTime(ctx.currentTime)}s`],
+                            ['Duration', `${formatTime(duration)}s`],
+                            ['State', convertStateEnum(ctx.state)],
+                            ['Playback rate', ctx.playbackRate],
+                        ]}
+                    />
+                </div>
                 <section styleName="controls">
                     <button
                         styleName="toggleplay"
@@ -78,16 +88,6 @@ export default class App extends React.Component {
                         />
                     </div>
                 </section>
-                <div styleName="other-info">
-                    <InfoTable
-                        rows={[
-                            ['Current time', `${formatTime(ctx.currentTime)}s`],
-                            ['Duration', `${formatTime(duration)}s`],
-                            ['State', convertStateEnum(ctx.state)],
-                            ['Playback rate', ctx.playbackRate],
-                        ]}
-                    />
-                </div>
             </div>
         )
     }
