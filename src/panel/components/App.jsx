@@ -69,10 +69,7 @@ export default class App extends React.Component {
                         styleName="toggleplay"
                         onClick={() => this.props.togglePlay()}
                     >
-                        <IconSVG
-                            styleName="svg"
-                            src={ctx.state === 0 ? pause : play}
-                        />
+                        <IconSVG src={ctx.state === 0 ? pause : play} />
                     </button>
                     <div styleName="seekbar">
                         <Seekbar

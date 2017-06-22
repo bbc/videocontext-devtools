@@ -37,16 +37,26 @@ $playbutton-size: 4em;
 }
 
 .toggleplay {
-  background-color: rgba(255, 255, 255, 0);
+  background-color: $transparent;
   border: 0;
+  fill: $black;
   flex-basis: $playbutton-size;
   flex-grow: 0;
   height: $playbutton-size;
-  padding: .7em;
-}
+  padding: 1em;
+  transition-duration: .5s;
+  transition-property: background-color, fill;
+  transition-timing-function: ease-out;
 
-.svg {
-  fill: $black;
+  &:hover {
+    background-color: $black;
+    fill: white;
+  }
+
+  &:active {
+    background-color: $transparent;
+    transition-duration: .1s;
+  }
 }
 
 .seekbar {
