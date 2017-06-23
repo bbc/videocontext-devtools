@@ -1,0 +1,33 @@
+@import '../config/colours';
+
+.main {
+  align-items: center;
+  color: $black;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  fill: $black;
+  height: 3em;
+  width: 3em;
+}
+
+.text {
+  font-weight: bold;
+  padding: 1em;
+}

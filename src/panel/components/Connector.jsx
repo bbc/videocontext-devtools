@@ -1,6 +1,7 @@
 import React from 'react'
 import { PageConnection as LivePageConnection, MockPageConnection } from '../io'
 import App from './App.jsx'
+import Loading from './Loading.jsx'
 import './Connector.scss'
 
 let PageConnection = LivePageConnection
@@ -40,7 +41,7 @@ export default class Connector extends React.Component {
                     togglePlay={() => this.conn.togglePlay()}
                     seek={time => this.conn.seek(time)}
                 /> :
-                <div>Connecting...</div>
+                <Loading />
             }
         </div>)
     }
