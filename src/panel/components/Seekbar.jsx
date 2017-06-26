@@ -1,4 +1,5 @@
 import React from 'react'
+import Slider from 'rc-slider'
 import './Seekbar.scss'
 
 export default class Seekbar extends React.Component {
@@ -19,16 +20,21 @@ export default class Seekbar extends React.Component {
 
     render () {
         return (
-            <input
+            <Slider
                 styleName="main"
-                type="range"
-                max="1"
-                min="0"
-                step="0.005"
+                max={1}
+                min={0}
+                step={0.005}
                 value={this.state.isUserScrubbing ? this.state.value : this.props.value}
-                onChange={e => this.handleSeek(e.target.value)}
-                onMouseDown={() => this.setState({ isUserScrubbing: true })}
-                onMouseUp={() => this.setState({ isUserScrubbing: false })}
+                onChange={val => this.handleSeek(val)}
+                onBeforeChange={() => this.setState({ isUserScrubbing: true })}
+                onAfterChange={() => this.setState({ isUserScrubbing: false })}
+                tipFormatter={null}
+                trackStyle={{ backgroundColor: '#454545' }}
+                handleStyle={{
+                    borderColor: '#454545',
+                    backgroundColor: '#454545',
+                }}
             />
         )
     }

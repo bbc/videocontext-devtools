@@ -45,6 +45,7 @@ $playbutton-size: 4em;
 .toggleplay {
   background-color: $transparent;
   border: 0;
+  cursor: pointer;
   fill: $black;
   flex-basis: $playbutton-size;
   flex-grow: 0;
