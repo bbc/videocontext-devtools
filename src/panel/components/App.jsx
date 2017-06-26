@@ -25,7 +25,15 @@ const convertStateEnum = (num) => {
     }
 }
 
-const formatTime = time => ((Math.round(time * 100)) / 100).toString()
+const leftPad = (num, size) => (`000000000${num}`).substr(-size)
+
+const toTwoDecimalPlaces = num => Math.round(num * 100) / 100
+
+const formatTime = (time) => {
+    const minutes = Math.floor(time / 60)
+    const seconds = Math.floor(time - (minutes * 60))
+    return `${minutes}:${leftPad(toTwoDecimalPlaces(seconds), 2)}`
+}
 
 const maxStopTimeForNodes = nodes => Math.max(...nodes
     .map(n => n.stop)
@@ -67,8 +75,8 @@ export default class App extends React.Component {
                 <div styleName="other-info">
                     <InfoTable
                         rows={[
-                            ['Current time', `${formatTime(ctx.currentTime)}s`],
-                            ['Duration', `${formatTime(duration)}s`],
+                            ['Current time', `${toTwoDecimalPlaces(ctx.currentTime)}s`],
+                            ['Duration', `${toTwoDecimalPlaces(duration)}s`],
                             ['State', convertStateEnum(ctx.state)],
                             ['Playback rate', ctx.playbackRate],
                         ]}
@@ -87,6 +95,9 @@ export default class App extends React.Component {
                             onUserSeek={value => this.props.seek(value * duration)}
                         />
                     </div>
+                    <span>
+                        {formatTime(ctx.currentTime)} / {formatTime(duration)}
+                    </span>
                 </section>
             </div>
         )
