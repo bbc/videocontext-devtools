@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageConnection as LivePageConnection, MockPageConnection } from '../io'
-import App from './App.jsx'
+import TabManager from './TabManager.jsx'
 import Loading from './Loading.jsx'
 import './Connector.scss'
 
@@ -35,13 +35,7 @@ export default class Connector extends React.Component {
 
     render () {
         return (<div styleName="main">
-            {this.state.json ?
-                <App
-                    json={this.state.json}
-                    togglePlay={() => this.conn.togglePlay()}
-                    seek={time => this.conn.seek(time)}
-                /> :
-                <Loading />
+            {this.state.json ? <TabManager conn={this.conn} json={this.state.json} /> : <Loading />
             }
         </div>)
     }

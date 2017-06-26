@@ -1,4 +1,5 @@
 @import '../config/colours';
+@import '../config/animations';
 
 $playbutton-size: 4em;
 
@@ -43,6 +44,7 @@ $playbutton-size: 4em;
 }
 
 .toggleplay {
+  @extend %button-animation;
   background-color: $transparent;
   border: 0;
   cursor: pointer;
@@ -51,9 +53,6 @@ $playbutton-size: 4em;
   flex-grow: 0;
   height: $playbutton-size;
   padding: 1em;
-  transition-duration: .5s;
-  transition-property: background-color, fill;
-  transition-timing-function: ease-out;
 
   &:hover {
     background-color: $black;

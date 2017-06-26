@@ -1,0 +1,58 @@
+@import '../config/colours';
+@import '../config/animations';
+
+$tab-spacing: 1em;
+
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+}
+
+.tabbar {
+  display: flex;
+  flex-flow: row nowrap;
+  font-family: monospace;
+  font-size: 1.2em;
+  justify-content: space-around;
+  margin: 0;
+  padding-bottom: 1em;
+}
+
+%tab {
+  @extend %button-animation;
+  background-color: #eee;
+  border: 0;
+  border-radius: .4em;
+  cursor: pointer;
+  flex-basis: 100%;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1.2em;
+  margin: 0 $tab-spacing;
+  padding: 1em;
+  text-align: center;
+}
+
+%tab-active {
+  background-color: $colour-primary;
+  color: white;
+}
+
+.tab {
+  @extend %tab;
+  &:hover {
+    @extend %tab-active;
+  }
+}
+
+.tab-active {
+  @extend %tab;
+  @extend %tab-active;
+  cursor: not-allowed;
+}
+
+.app {
+  flex-basis: 100%;
+  flex-grow: 1;
+}

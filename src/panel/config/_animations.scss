@@ -1,0 +1,5 @@
+%button-animation {
+  transition-duration: .3s;
+  transition-property: background-color, fill, color;
+  transition-timing-function: ease-out;
+}

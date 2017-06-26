@@ -1,12 +1,20 @@
-var VIDEOCONTEXT_VARIABLE = "__VIDEOCONTEXT_REF__"
+var STORE_VARIABLE = "__VIDEOCONTEXT_REFS__"
 
 function retrieveJson() {
-    var clientFunctionName = "__GET_VIDEOCONTEXT_JSON__"
     var tempAttrName = "__VIDEOCONTEXT_EXTENSION_tmp_json"
     var tempScriptId = "__VIDEOCONTEXT_EXTENSION_tmpScript"
 
-    var scriptContent = "";
-    scriptContent += "if (typeof " + clientFunctionName + " !== 'undefined') document.body.setAttribute('" + tempAttrName + "', JSON.stringify(" + clientFunctionName + "()));\n"
+    var scriptContent = `
+        if (window.${STORE_VARIABLE}) {
+            var json = {}
+            Object.keys(window.${STORE_VARIABLE}).map(id => {
+                json[id] = ${STORE_VARIABLE}[id].snapshot()
+            });
+            document.body.setAttribute(
+                '${tempAttrName}',
+                JSON.stringify(json)
+            );
+        }`
 
     var script = document.createElement('script');
     script.id = tempScriptId;
@@ -25,7 +33,7 @@ function retrieveJson() {
 }
 
 function executeScript(scriptContent, id) {
-    var tempScriptId = "__VIDEOCONTEXT_EXTENSION_" + id + "__"
+    var tempScriptId = `__VIDEOCONTEXT_EXTENSION_${id}__`
     var script = document.createElement('script');
     script.id = tempScriptId;
     script.appendChild(document.createTextNode(scriptContent));
@@ -34,14 +42,29 @@ function executeScript(scriptContent, id) {
     scriptOwner.removeChild(document.getElementById(tempScriptId))
 }
 
-function togglePlay() {
-    var scriptContent = "if (window." + VIDEOCONTEXT_VARIABLE + ") { if (" + VIDEOCONTEXT_VARIABLE + ".state === 0) { " + VIDEOCONTEXT_VARIABLE + ".pause() } else { " + VIDEOCONTEXT_VARIABLE + ".play() } }";
+function togglePlay(ctxId) {
+    var scriptContent = `
+        var ctxId = "${ctxId}";
+        if (window.${STORE_VARIABLE} && window.${STORE_VARIABLE}[ctxId]) {
+            var ctx = ${STORE_VARIABLE}[ctxId];
+            if (ctx.state === 0) {
+                ctx.pause()
+            } else {
+                ctx.play()
+            }
+        }`;
     executeScript(scriptContent, "togglePlay");
 }
 
 
-function seek (time) {
-    var scriptContent = "if (window." + VIDEOCONTEXT_VARIABLE + ") { " + VIDEOCONTEXT_VARIABLE + ".currentTime = " + time + "; }";
+function seek (ctxId, time) {
+    var scriptContent = `
+        var ctxId = "${ctxId}";
+        if (window.${STORE_VARIABLE} && window.${STORE_VARIABLE}[ctxId]) {
+            var ctx = ${STORE_VARIABLE}[ctxId];
+            ctx.currentTime = ${time};
+        }`
+
     executeScript(scriptContent, "seek");
 }
 
@@ -55,11 +78,11 @@ chrome.runtime.onMessage.addListener(msg => {
         return;
     }
     case "tellContentScriptToTogglePlay": {
-        togglePlay();
+        togglePlay(msg.ctxId);
         return;
     }
     case "tellContentScriptToSeek": {
-        seek(msg.time);
+        seek(msg.ctxId, msg.time);
         return;
     }
     default:

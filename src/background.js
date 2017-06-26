@@ -28,7 +28,7 @@ chrome.runtime.onConnect.addListener(function (port) {
             console.log("BG received message to toggle play");
             chrome.tabs.sendMessage(
                 message.tabId,
-                { type: "tellContentScriptToTogglePlay" }
+                { type: "tellContentScriptToTogglePlay", ctxId: message.ctxId }
             )
             return
         }
@@ -37,7 +37,7 @@ chrome.runtime.onConnect.addListener(function (port) {
             console.log("BG received message to seek to time ", message.time);
             chrome.tabs.sendMessage(
                 message.tabId,
-                { type: "tellContentScriptToSeek", time: message.time }
+                { type: "tellContentScriptToSeek", time: message.time, ctxId: message.ctxId }
             )
         }
     }

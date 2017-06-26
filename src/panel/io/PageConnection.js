@@ -18,18 +18,20 @@ export default class PageConnection {
         })
     }
 
-    togglePlay () {
+    togglePlay (id) {
         this._backgroundPageConnection.postMessage({
             tabId: chrome.devtools.inspectedWindow.tabId,
             name: 'togglePlay',
+            ctxId: id,
         })
     }
 
-    seek (time) {
+    seek (id, time) {
         this._backgroundPageConnection.postMessage({
             tabId: chrome.devtools.inspectedWindow.tabId,
             name: 'seek',
             time,
+            ctxId: id,
         })
     }
 }
