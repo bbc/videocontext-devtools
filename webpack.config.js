@@ -2,10 +2,15 @@ const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-    entry: './src/panel/index.js',
+    entry: {
+        panel: './src/panel/index.js',
+        '../background': './src/background.js',
+        '../contentscript': './src/contentscript.js',
+        '../devtools': './src/devtools.js',
+    },
     output: {
         path: path.resolve(__dirname, 'dist', 'panel'),
-        filename: 'panel.js',
+        filename: '[name].js',
         publicPath: '/',
     },
     devtool: 'cheap-module-source-map',
@@ -24,26 +29,26 @@ module.exports = {
                     },
                     {
                         loader: 'css-loader',
-                    }
-                ]
+                    },
+                ],
             },
             {
                 test: /\.scss$/,
                 use: [
                     {
-                        loader: 'style-loader'
+                        loader: 'style-loader',
                     },
                     {
                         loader: 'css-loader',
                         options: {
                             importLoader: 1,
                             modules: true,
-                            localIdentName: '[path]___[name]__[local]___[hash:base64:5]'
+                            localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
                         },
                     },
                     {
-                        loader: 'sass-loader'
-                    }
+                        loader: 'sass-loader',
+                    },
                 ],
                 include: /src/,
             },
@@ -51,19 +56,18 @@ module.exports = {
                 test: /\.svg$/,
                 use: 'svg-inline-loader',
                 include: /src/,
-            }
+            },
         ],
     },
     plugins: [
         new CopyWebpackPlugin([
             { from: 'src/*.html', to: '../[name].html' },
-            { from: 'src/*.js', to: '../[name].js' },
             { from: 'src/manifest.json', to: '../manifest.json' },
-            { from : 'src/panel/index.html', to: 'index.html' },
+            { from: 'src/panel/index.html', to: 'index.html' },
         ]),
     ],
     devServer: {
         contentBase: path.resolve(__dirname, 'dist', 'panel'),
         publicPath: '/',
-    }
+    },
 }
