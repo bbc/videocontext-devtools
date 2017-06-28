@@ -2,43 +2,38 @@ const connections = {}
 
 chrome.runtime.onConnect.addListener((port) => {
     const extensionListener = (message) => {
-        // The original connection event doesn't include the tab ID of the
-        // DevTools page, so we need to send it explicitly.
-        if (message.name === 'init') {
+        switch (message.name) {
+        case 'init': {
             console.log('we have connected!!!')
             connections[message.tabId] = port
-            return
+            break
         }
-
-        // other message handling
-        if (message.name === 'getJSON') {
+        case 'getJSON': {
             console.log('BG received message to get JSON')
             chrome.tabs.sendMessage(
                 message.tabId,
                 { type: 'askContentScriptForJSON' },
             )
-            // console.log(chrome.tabs);
-            // SEND MESSAGE TO CONTENT SCRIPT USING chrome.tabs.sendMessage.
-            // This will then send a message which we deal with in
-            // chrome.runtime.onMessage, which will then pass the result to panel.js.
-            return
+            break
         }
-
-        if (message.name === 'togglePlay') {
+        case 'togglePlay': {
             console.log('BG received message to toggle play')
             chrome.tabs.sendMessage(
                 message.tabId,
                 { type: 'tellContentScriptToTogglePlay', ctxId: message.ctxId },
             )
-            return
+            break
         }
-
-        if (message.name === 'seek') {
+        case 'seek': {
             console.log('BG received message to seek to time ', message.time)
             chrome.tabs.sendMessage(
                 message.tabId,
                 { type: 'tellContentScriptToSeek', time: message.time, ctxId: message.ctxId },
             )
+            break
+        }
+        default:
+            break
         }
     }
 
