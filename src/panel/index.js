@@ -1,3 +1,5 @@
+// Ben Robinson, © BBC Research & Development, 2017
+
 import ReactDOM from 'react-dom'
 import React from 'react'
 
