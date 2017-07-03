@@ -1,5 +1,5 @@
 {
-  "name": "visualise-videocontext-extension",
+  "name": "videocontext-devtools",
   "version": "0.0.1",
   "description": "Visualise VideoContext",
   "main": "index.js",
