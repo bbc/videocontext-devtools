@@ -1,5 +1,6 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const VERSION = require('./package.json').version
 
 module.exports = {
     entry: {
@@ -62,7 +63,15 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             { from: 'src/*.html', to: '../[name].html' },
-            { from: 'src/manifest.json', to: '../manifest.json' },
+            {
+                from: 'src/manifest.json',
+                to: '../manifest.json',
+                transform: (content) => {
+                    const manifest = JSON.parse(content)
+                    const updatedManifest = Object.assign({}, manifest, { version: VERSION })
+                    return JSON.stringify(updatedManifest)
+                },
+            },
             { from: 'src/panel/index.html', to: 'index.html' },
         ]),
     ],
