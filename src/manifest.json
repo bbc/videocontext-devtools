@@ -11,5 +11,6 @@
   "background": {
       "scripts": ["background.js"]
   },
-  "devtools_page": "devtools.html"
+  "devtools_page": "devtools.html",
+  "update_url": "http://www.rd.bbc.co.uk/zap/videocontext-devtools-bin/updates.xml"
 }
