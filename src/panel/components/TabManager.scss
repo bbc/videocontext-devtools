@@ -6,6 +6,7 @@ $tab-spacing: 1em;
   display: flex;
   flex-flow: column nowrap;
   height: 100%;
+  position: relative;
 }
 
 .tabbar {
@@ -45,6 +46,6 @@ $tab-spacing: 1em;
 }
 
 .app {
-  flex-basis: 100%;
   flex-grow: 1;
+  position: relative;
 }
