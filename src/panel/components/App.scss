@@ -22,7 +22,7 @@ $playbutton-size: 4em;
 
 .vis-detached {
   @extend %vis;
-  background-color: #FFDFDF;
+  background-color: $detached-colour;
 }
 
 .detach-button {
@@ -56,7 +56,7 @@ $playbutton-size: 4em;
 
   &:hover {
     background-color: $black;
-    fill: white;
+    fill: $white;
   }
 
   &:active {

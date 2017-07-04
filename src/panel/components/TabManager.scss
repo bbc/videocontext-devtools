@@ -21,7 +21,7 @@ $tab-spacing: 1em;
 
 %tab {
   @extend %button-animation;
-  background-color: #eee;
+  background-color: $tab-colour-inactive;
   border: 0;
   border-radius: .4em;
   cursor: pointer;
@@ -36,11 +36,12 @@ $tab-spacing: 1em;
 
 %tab-active {
   background-color: $colour-primary;
-  color: white;
+  color: $white;
 }
 
 .tab {
   @extend %tab;
+
   &:hover {
     @extend %tab-active;
   }
