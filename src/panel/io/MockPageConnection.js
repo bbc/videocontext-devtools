@@ -11,10 +11,10 @@ export default class MockPageConnection {
     }
 
     togglePlay (id) {
-        console.log('Toggle play called. This does nothing.')
+        console.log(`Toggle play called for id ${id}. This does nothing.`)
     }
 
     seek (id, time) {
-        console.log(`seek called with time ${time}. This does nothing.`)
+        console.log(`seek called with id ${id} and time ${time}. This does nothing.`)
     }
 }
