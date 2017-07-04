@@ -1,34 +1,34 @@
-const connections = {}
+const CONNECTIONS = {}
 
 chrome.runtime.onConnect.addListener((port) => {
     const extensionListener = (message) => {
         switch (message.name) {
-        case 'init': {
-            console.log('we have connected!!!')
-            connections[message.tabId] = port
+        case 'INIT': {
+            console.log('Connected!')
+            CONNECTIONS[message.tabId] = port
             break
         }
-        case 'getJSON': {
-            console.log('BG received message to get JSON')
+        case 'GET_JSON': {
+            // console.log('BG received message to get JSON')
             chrome.tabs.sendMessage(
                 message.tabId,
-                { type: 'askContentScriptForJSON' },
+                { type: 'ASK_CONTENT_SCRIPT_FOR_JSON' },
             )
             break
         }
-        case 'togglePlay': {
-            console.log('BG received message to toggle play')
+        case 'TOGGLE_PLAY': {
+            // console.log('BG received message to toggle play')
             chrome.tabs.sendMessage(
                 message.tabId,
-                { type: 'tellContentScriptToTogglePlay', ctxId: message.ctxId },
+                { type: 'TELL_CONTENT_SCRIPT_TO_TOGGLE_PLAY', ctxId: message.ctxId },
             )
             break
         }
-        case 'seek': {
-            console.log('BG received message to seek to time ', message.time)
+        case 'SEEK': {
+            // console.log('BG received message to seek to time ', message.time)
             chrome.tabs.sendMessage(
                 message.tabId,
-                { type: 'tellContentScriptToSeek', time: message.time, ctxId: message.ctxId },
+                { type: 'TELL_CONTENT_SCRIPT_TO_SEEK', time: message.time, ctxId: message.ctxId },
             )
             break
         }
@@ -42,12 +42,12 @@ chrome.runtime.onConnect.addListener((port) => {
 
     port.onDisconnect.addListener(() => {
         port.onMessage.removeListener(extensionListener)
-        console.log('we are disconnecting!')
-        const tabs = Object.keys(connections)
+        console.log('Disconnecting!')
+        const tabs = Object.keys(CONNECTIONS)
 
         tabs.forEach((tab) => {
-            if (connections[tab] === port) {
-                delete connections[tab]
+            if (CONNECTIONS[tab] === port) {
+                delete CONNECTIONS[tab]
             }
         })
     })
@@ -57,20 +57,24 @@ chrome.runtime.onConnect.addListener((port) => {
 // current tab
 chrome.runtime.onMessage.addListener((request, sender) => {
     // Messages from content scripts should have sender.tab set
-    if (sender.tab) {
-        const tabId = sender.tab.id
-        if (tabId in connections) {
-            connections[tabId].postMessage(request)
-        } else {
-            console.log('Tab not found in connection list.')
-        }
-    } else {
-        console.log('sender.tab not defined.')
+    if (!sender.tab) {
+        console.log('Sender.tab is not defined.')
+        return
     }
-    if (request.type === 'contentscriptSendingJSON') {
-        console.log('json is', request.payload)
-        console.log(sender.tab.id)
-        console.log(connections)
-        connections[sender.tab.id].postMessage(request)
+
+    const tabId = sender.tab.id
+    if (!(tabId in CONNECTIONS)) {
+        console.log('Tab not found in connection list.')
+        return
+    }
+
+    // Respond to the message.
+    switch (request.type) {
+    case 'contentscriptSendingJSON':
+        // console.log('BG sending JSON to devtools')
+        CONNECTIONS[sender.tab.id].postMessage(request)
+        break
+    default:
+        break
     }
 })

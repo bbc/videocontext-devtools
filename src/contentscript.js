@@ -1,8 +1,9 @@
+import { executeScript, executeScriptAndReadResultFromDOM } from './dom-utils'
+
 const STORE_VARIABLE = '__VIDEOCONTEXT_REFS__'
 
-function retrieveJson () {
+function readStateOfVideoContextInstances () {
     const tempAttrName = '__VIDEOCONTEXT_EXTENSION_tmp_json'
-    const tempScriptId = '__VIDEOCONTEXT_EXTENSION_tmpScript'
 
     const scriptContent = `
         if (window.${STORE_VARIABLE}) {
@@ -16,30 +17,7 @@ function retrieveJson () {
             );
         }`
 
-    const script = document.createElement('script')
-    script.id = tempScriptId
-    script.appendChild(document.createTextNode(scriptContent))
-    const scriptOwner = (document.body || document.head || document.documentElement)
-    scriptOwner.appendChild(script)
-
-    let result = null
-    if (document.body.hasAttribute(tempAttrName)) {
-        result = JSON.parse(document.body.getAttribute(tempAttrName))
-        document.body.removeAttribute(tempAttrName)
-    }
-    scriptOwner.removeChild(document.getElementById(tempScriptId))
-
-    return result
-}
-
-function executeScript (scriptContent, id) {
-    const tempScriptId = `__VIDEOCONTEXT_EXTENSION_${id}__`
-    const script = document.createElement('script')
-    script.id = tempScriptId
-    script.appendChild(document.createTextNode(scriptContent))
-    const scriptOwner = (document.body || document.head || document.documentElement)
-    scriptOwner.appendChild(script)
-    scriptOwner.removeChild(document.getElementById(tempScriptId))
+    return JSON.parse(executeScriptAndReadResultFromDOM(scriptContent, 'getJSON', tempAttrName))
 }
 
 function togglePlay (ctxId) {
@@ -69,18 +47,18 @@ function seek (ctxId, time) {
 
 chrome.runtime.onMessage.addListener((msg) => {
     switch (msg.type) {
-    case 'askContentScriptForJSON': {
+    case 'ASK_CONTENT_SCRIPT_FOR_JSON': {
         chrome.runtime.sendMessage({
             type: 'contentscriptSendingJSON',
-            payload: retrieveJson(),
+            payload: readStateOfVideoContextInstances(),
         })
         break
     }
-    case 'tellContentScriptToTogglePlay': {
+    case 'TELL_CONTENT_SCRIPT_TO_TOGGLE_PLAY': {
         togglePlay(msg.ctxId)
         break
     }
-    case 'tellContentScriptToSeek': {
+    case 'TELL_CONTENT_SCRIPT_TO_SEEK': {
         seek(msg.ctxId, msg.time)
         break
     }
