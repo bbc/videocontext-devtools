@@ -65,14 +65,23 @@ export default class App extends React.Component {
                         }}
                     />
                 </section>
-
-                <button
-                    styleName="detach-button"
-                    onClick={() => this.setState(state => ({ detached: !state.detached }))}
+                <section
+                    styleName="detached-warning"
+                    style={{ visibility: this.state.detached ? 'visible' : 'hidden' }}
                 >
-                    {this.state.detached ? 'Undetach' : 'Detach'}
-                </button>
-                <div styleName="other-info">
+                    <p>
+                        <span styleName="bold">Warning:</span>{` you are now in 'detached' mode. This lets you inspect
+                        the VideoContext graph without it constantly re-rendering while
+                        you inspect it. To get the graph updating again, press the
+                        'Undetach' button.`}
+                    </p>
+                    <button
+                        onClick={() => this.setState(state => ({ detached: !state.detached }))}
+                    >
+                        Undetach
+                    </button>
+                </section>
+                <section styleName="other-info">
                     <InfoTable
                         rows={[
                             ['Current time', `${toTwoDecimalPlaces(ctx.currentTime)}s`],
@@ -81,7 +90,7 @@ export default class App extends React.Component {
                             ['Playback rate', ctx.playbackRate],
                         ]}
                     />
-                </div>
+                </section>
                 <section styleName="controls">
                     <button
                         styleName="toggleplay"
