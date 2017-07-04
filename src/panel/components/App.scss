@@ -31,7 +31,7 @@ $playbutton-size: 4em;
   display: flex;
   flex-flow: row nowrap;
   flex-grow: 0;
-  padding: .5em 0;
+  padding: 1em 0;
 
   p {
     font-style: italic;
@@ -49,7 +49,7 @@ $playbutton-size: 4em;
   align-self: center;
   display: flex;
   flex-flow: row nowrap;
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 .controls {
