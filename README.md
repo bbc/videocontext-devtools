@@ -20,5 +20,7 @@ So the way the Content Script gets the state of a VideoContext is:
 1. When a user instantiates a VideoContext instance, VideoContext will automatically attach a reference to a global variable: `window.__VIDEOCONTEXT_REFS__[ctx.id] = ctx`.
 2. The Dev Tools UI sends a message to the Background Script asking for the state of all registered VideoContext instances.
 3. The Background Script forwards this message to the running Content Script.
-4. The Content Script attaches a temporary `<script>` tag to the DOM that calls `JSON.stringify(ctx.snapshot())` and puts the resulting string into a temporary DOM element.
-5. The Content Script then reads the JSON string from the temporary DOM element and deletes the temporary script tag. It forwards the JSON to the Background Script, which forwards it to the Dev Tools, which updates the UI.
+4. The Content Script attaches a temporary `<script>` tag to the DOM that calls `JSON.stringify(ctx.snapshot())` for each VideoContext instance, and puts the resulting string into a temporary DOM element.
+5. The Content Script then reads the JSON string from the temporary DOM element, and then deletes the temporary DOM element and script tag. It forwards the JSON to the Background Script, which forwards it to the Dev Tools UI.
+
+A similar procedure happens to make the play/pause/scrub controls work.
