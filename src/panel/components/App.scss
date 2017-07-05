@@ -16,7 +16,7 @@ $playbutton-size: 4em;
 %vis {
   flex-basis: 1px;
   flex-grow: 1;
-  flex-shrink: 0;
+  position: relative;
 }
 
 .vis {
