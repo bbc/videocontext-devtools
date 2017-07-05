@@ -1,6 +1,7 @@
 import React from 'react'
 import Visualisation from './Visualisation.jsx'
 import InfoTable from './InfoTable.jsx'
+import DetachedWarning from './DetachedWarning.jsx'
 import IconSVG from 'svg-inline-react'
 import Seekbar from './Seekbar.jsx'
 import play from '../img/play.svg'
@@ -69,17 +70,7 @@ export default class App extends React.Component {
                     styleName="detached-warning"
                     style={{ visibility: this.state.detached ? 'visible' : 'hidden' }}
                 >
-                    <p>
-                        <span styleName="bold">Warning:</span>{` you are now in 'detached' mode. This lets you inspect
-                        the VideoContext graph without it constantly re-rendering while
-                        you inspect it. To get the graph updating again, press the
-                        'Undetach' button.`}
-                    </p>
-                    <button
-                        onClick={() => this.setState(state => ({ detached: !state.detached }))}
-                    >
-                        Undetach
-                    </button>
+                    <DetachedWarning onClick={() => this.setState({ detached: false })} />
                 </section>
                 <section styleName="other-info">
                     <InfoTable

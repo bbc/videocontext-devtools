@@ -29,22 +29,8 @@ $playbutton-size: 4em;
 }
 
 .detached-warning {
-  align-items: center;
   align-self: center;
-  display: flex;
-  flex-flow: row nowrap;
-  flex-grow: 0;
   padding: 1em 0;
-
-  p {
-    font-style: italic;
-    margin: 0;
-    padding-right: 1em;
-  }
-
-  .bold {
-    font-weight: bold;
-  }
 }
 
 .other-info {
