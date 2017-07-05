@@ -2,11 +2,11 @@
 # yarn lockfile v1
 
 
-"@bbc/visualise-videocontext@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@bbc/visualise-videocontext/-/visualise-videocontext-4.1.0.tgz#ca9611c2a457ec336d445f4a3087cccefc15de43"
+"@bbc/visualise-videocontext@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@bbc/visualise-videocontext/-/visualise-videocontext-4.2.0.tgz#14665041e5eba4cb3d7b2c5fe4751df1043d98f4"
   dependencies:
-    cytoscape "^3.0.0"
+    cytoscape "^3.1.2"
     cytoscape-dagre "^1.5.0"
 
 abbrev@1:
@@ -1434,9 +1434,9 @@ cytoscape-dagre@^1.5.0:
   dependencies:
     dagre "~0.7.4"
 
-cytoscape@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.0.0.tgz#d47ed5bd7fb0206325cd6343f7fd0e1be0d106b2"
+cytoscape@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/cytoscape/-/cytoscape-3.1.2.tgz#873684332e43c144017de5e1143c8e5dab738f8e"
 
 d@1:
   version "1.0.0"
