@@ -1,8 +1,6 @@
 @import '../config/colours';
 @import '../config/animations';
 
-$playbutton-size: 4em;
-
 .main {
   align-items: stretch;
   display: flex;
@@ -38,31 +36,4 @@ $playbutton-size: 4em;
   align-self: center;
   display: flex;
   flex-flow: row nowrap;
-  flex-grow: 0;
-}
-
-.controls {
-  align-items: center;
-  display: flex;
-  flex-flow: row nowrap;
-  flex-grow: 0;
-}
-
-.toggleplay {
-  background-color: $transparent;
-  border-radius: 0;
-  fill: $black;
-  flex-basis: $playbutton-size;
-  flex-grow: 0;
-  height: $playbutton-size;
-
-  &:hover {
-    background-color: $black;
-    fill: $white;
-  }
-}
-
-.seekbar {
-  flex-grow: 1;
-  padding: 0 1em;
 }
