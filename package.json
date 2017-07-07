@@ -7,9 +7,9 @@
   "license": "BSD-3-Clause",
   "scripts": {
     "start": "webpack-dev-server",
-    "watch": "webpack --watch",
     "build": "webpack -p"
   },
+  "repository": "https://github.com/bbc/videocontext-devtools",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
@@ -35,9 +35,9 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "@bbc/visualise-videocontext": "^4.3.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "svg-inline-react": "1"
+    "svg-inline-react": "1",
+    "visualise-videocontext": "^1.0.1"
   }
 }

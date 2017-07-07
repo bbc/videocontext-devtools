@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@bbc/visualise-videocontext@^4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@bbc/visualise-videocontext/-/visualise-videocontext-4.3.0.tgz#a0d777fe8b37cb53f17b8411c8619289f1f78c3a"
-  dependencies:
-    cytoscape "^3.1.2"
-    cytoscape-dagre "^1.5.0"
-
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -1429,8 +1422,8 @@ currently-unhandled@^0.4.1:
     array-find-index "^1.0.1"
 
 cytoscape-dagre@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/cytoscape-dagre/-/cytoscape-dagre-1.5.0.tgz#0bbb6b116f31f035d5cf79361dab4d10cf7ab42c"
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/cytoscape-dagre/-/cytoscape-dagre-1.6.0.tgz#10abcc30ef348b60132cad64820b66ddc7fcd069"
   dependencies:
     dagre "~0.7.4"
 
@@ -4824,6 +4817,13 @@ verror@1.3.6:
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
   dependencies:
     extsprintf "1.0.2"
+
+visualise-videocontext@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/visualise-videocontext/-/visualise-videocontext-1.0.1.tgz#da4a9958e27d36efc667b75ee778b62861990330"
+  dependencies:
+    cytoscape "^3.1.2"
+    cytoscape-dagre "^1.5.0"
 
 vm-browserify@0.0.4:
   version "0.0.4"

@@ -1,5 +1,5 @@
 import React from 'react'
-import VideoContextVisualisation from '@bbc/visualise-videocontext'
+import VideoContextVisualisation from 'visualise-videocontext'
 import './Visualisation.scss'
 
 export default class Visualisation extends React.Component {
