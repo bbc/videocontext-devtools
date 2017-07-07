@@ -1,6 +1,6 @@
 {
   "name": "videocontext-devtools",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Visualise VideoContext",
   "main": "index.js",
   "author": "Ben Robinson <ben.robinson@bbc.co.uk>",
