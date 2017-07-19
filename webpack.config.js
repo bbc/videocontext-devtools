@@ -5,8 +5,6 @@ const VERSION = require('./package.json').version
 module.exports = {
     entry: {
         panel: './src/panel/index.js',
-        '../background': './src/background.js',
-        '../contentscript': './src/contentscript.js',
         '../devtools': './src/devtools.js',
     },
     output: {
