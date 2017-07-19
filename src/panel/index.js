@@ -1,5 +1,6 @@
 // Ben Robinson, © BBC Research & Development, 2017
 
+import 'babel-polyfill'
 import ReactDOM from 'react-dom'
 import React from 'react'
 
