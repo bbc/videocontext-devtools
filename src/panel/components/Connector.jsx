@@ -13,20 +13,15 @@ if (process.env.NODE_ENV !== 'production') {
 export default class Connector extends React.Component {
     constructor (props) {
         super(props)
+        this.conn = new PageConnection()
         this.state = {
             json: null,
         }
     }
     componentDidMount () {
-        this.conn = new PageConnection((msg) => {
-            if (msg) {
-                this.setState({ json: msg })
-            } else {
-                this.setState({ json: null })
-            }
-        })
-        this._timer = setInterval(() => {
-            this.conn.requestJSONFromBackground()
+        this._timer = setInterval(async () => {
+            const json = await this.conn.requestJSONFromBackground()
+            this.setState({ json })
         }, 100)
     }
     componentWillUnmount () {
