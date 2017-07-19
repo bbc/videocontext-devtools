@@ -2,6 +2,8 @@
 
 A handy addition to your Chrome Dev Tools for VideoContext. **Requires VideoContext v0.50+**.
 
+![demo](./demo.gif)
+
 To install it, follow the instructions at <https://bbc.github.io/videocontext-devtools/>. Once the extension is installed, open an app with a running instance of VideoContext (you can find a ready-made one [here](http://bbc.github.io/VideoContext/examples/transitions.html)), open your Chrome DevTools and navigate to the VideoContext DevTools tab.
 
 ## Identifying running instances
