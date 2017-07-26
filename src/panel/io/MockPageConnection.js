@@ -16,4 +16,12 @@ export default class MockPageConnection {
     async seek (id, time) {
         console.log(`seek called with id ${id} and time ${time}. This does nothing.`)
     }
+
+    async highlightElement (id) {
+        console.log(`highlightElement called with id ${id}`)
+    }
+
+    async unhighlightElement (id) {
+        console.log(`unhighlightElement called with id ${id}`)
+    }
 }

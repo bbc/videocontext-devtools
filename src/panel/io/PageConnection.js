@@ -50,4 +50,22 @@ export default class PageConnection {
             }`
         await runScript(script)
     }
+
+    async _setCanvasOpacity (id, opacity) {
+        const script = `
+        var ctxId = "${id}";
+        if (window.${STORE_VARIABLE} && window.${STORE_VARIABLE}[ctxId]) {
+            var ctx = ${STORE_VARIABLE}[ctxId];
+            ctx.element.style.opacity = ${opacity};
+        }`
+        await runScript(script)
+    }
+
+    async highlightElement (id) {
+        await this._setCanvasOpacity(id, 0.5)
+    }
+
+    async unhighlightElement (id) {
+        await this._setCanvasOpacity(id, 1.0)
+    }
 }

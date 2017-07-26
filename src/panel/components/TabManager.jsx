@@ -18,8 +18,14 @@ export default class extends React.Component {
                         <button
                             styleName={id === this.state.activeId ? 'tab-active' : 'tab'}
                             key={id}
-                            onClick={() => this.setState({ activeId: id, detached: false })}
-                            disabled={id === this.state.activeId}
+                            onClick={() => {
+                                const isAlreadySelected = id === this.state.activeId
+                                if (!isAlreadySelected) {
+                                    this.setState({ activeId: id, detached: false })
+                                }
+                            }}
+                            onMouseEnter={() => this.props.conn.highlightElement(id)}
+                            onMouseLeave={() => this.props.conn.unhighlightElement(id)}
                         >
                             {id}
                         </button>
