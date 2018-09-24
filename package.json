@@ -42,6 +42,6 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "svg-inline-react": "1",
-    "visualise-videocontext": "^1.0.1"
+    "visualise-videocontext": "^1.2.2"
   }
 }
